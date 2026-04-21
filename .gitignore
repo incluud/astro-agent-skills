@@ -1,0 +1,7 @@
+.DS_Store
+.codex/
+.cursor/
+.claude/
+.claude-code/
+.opencode/
+node_modules/
