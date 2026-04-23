@@ -37,6 +37,8 @@ If the integration is community-maintained, install it with the project package 
 
 Before finalizing, verify the current setup in the official Astro docs or the integration README, especially when Astro or the integration recently changed versions.
 
+If the project is also upgrading Astro itself, upgrade Astro and official integrations together. For Astro 6, confirm the environment is running Node 22.12.0 or newer before treating integration issues as application bugs.
+
 ### 3. Configure Astro deliberately
 
 When editing `astro.config.*`:
@@ -96,6 +98,7 @@ After setup:
 
 - confirm the integration is registered in `astro.config.*`
 - run the project checks that make sense for the repo, such as `astro check`, `astro build`, or the existing test suite
+- confirm the deployment/runtime environment still matches the adapter requirements after major Astro upgrades
 - inspect for hydration mismatches, missing styles, or adapter/runtime drift
 
 ## Common Failure Modes

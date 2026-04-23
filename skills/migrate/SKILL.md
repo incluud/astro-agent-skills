@@ -88,9 +88,19 @@ Check at least:
 
 For Astro-to-Astro upgrades:
 
-- start with the official upgrade guide
-- update integrations and adapters together when required
-- verify deprecated APIs before touching feature code
-- rerun content and routing checks after the upgrade
+- start with the official upgrade guide and use `npx @astrojs/upgrade` when it fits the repo
+- update official integrations and adapters together with Astro, not as a separate afterthought
+- verify the local and deployment runtime meet the current Node requirement before debugging code-level issues
+- rerun content, routing, and build checks after the upgrade
+
+For Astro 6 specifically, check these breakpoints:
+
+- Node runtime: Astro 6 requires Node 22.12.0 or newer
+- content collections: use `src/content.config.*`, define a `loader` for every collection, remove `type`, import `z` from `astro/zod`, use `entry.id` instead of `slug`, and replace `entry.render()` with `render(entry)`
+- legacy collection flags: remove any `legacy.collections` config
+- file querying: replace `Astro.glob()` with `import.meta.glob()` or `getCollection()` for content collections
+- view transitions: replace `<ViewTransitions />` with `<ClientRouter />` if it still exists in the project
+- `getStaticPaths()`: remove `Astro.generator`, and replace `Astro.site` with `import.meta.env.SITE` if it is used inside `getStaticPaths()`
+- custom schemas: review custom Zod usage against Zod 4 if validation starts failing after the upgrade
 
 Use version-specific docs for breaking changes. Do not assume older migration advice still applies to the current Astro release.
